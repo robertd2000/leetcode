@@ -8,15 +8,14 @@ impl TwoSum {
                 return vec![(l + 1) as i32, (r + 1) as i32];
             }
 
-              if numbers[l] + numbers[r] > target {
+            if numbers[l] + numbers[r] > target {
                  r = r - 1;
             }
 
-              if numbers[l] + numbers[r] < target {
+            if numbers[l] + numbers[r] < target {
                  l = l + 1;
             }
         }
-
 
          vec![0, 0]
     }
