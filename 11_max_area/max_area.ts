@@ -4,8 +4,8 @@ function maxArea(height: number[]): number {
   let max = 0;
 
   while (l < r) {
-    let lH = height[l];
-    let rH = height[r];
+    const lH = height[l];
+    const rH = height[r];
     let square = Math.min(lH, rH) * (r - l);
 
     if (square > max) {
