@@ -1,12 +1,10 @@
-# 1. [Two Sum]( https://leetcode.com/problems/two-sum/description/?envType=featured-list&envId=top-interview-questions?envType=featured-list&envId=top-interview-questions)
+# [1. Two Sum](https://leetcode.com/problems/two-sum/description/?envType=featured-list&envId=top-interview-questions?envType=featured-list&envId=top-interview-questions)
 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
 You can return the answer in any order.
-
- 
 
 ## Example 1:
 
@@ -28,7 +26,7 @@ Output: [1,2]
 ```
 Input: nums = [3,3], target = 6
 Output: [0,1]
- ```
+```
 
 ## Constraints:
 
@@ -38,7 +36,6 @@ Output: [0,1]
 -109 <= target <= 109
 ```
 
-_Only one valid answer exists._ 
- 
+_Only one valid answer exists._
 
-__Follow-up:__ Can you come up with an algorithm that is less than O(n2) time complexity?
+**Follow-up:** Can you come up with an algorithm that is less than O(n2) time complexity?
