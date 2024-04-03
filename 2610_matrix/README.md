@@ -36,3 +36,36 @@ Explanation: All elements of the array are distinct, so we can keep all of them 
 1 <= nums.length <= 200
 1 <= nums[i] <= nums.length
 ```
+
+frequency vector is initialized with a size of nums.size() + 1 to accommodate indexing from 0 to nums.size().
+For each integer num in the nums vector:
+If the frequency of integer num (frequency[c]) is equal to or greater than the size of ans, it means we need to add a new empty subarray to the result result.
+The integer num is then added to the subarray in ans corresponding to its current frequency (frequency[c]).
+Finally, the frequency of integer num is incremented.
+
+# Complexity
+
+- **Time complexity:**
+  `O(n)`
+
+- **Space complexity:**
+  `O(n)`
+
+# Code
+
+```python
+
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        frequency = [0] * (len(nums) + 1)
+
+        for i in nums:
+            if frequency[i] >= len(res):
+                res.append([])
+            res[frequency[i]].append(i)
+            frequency[i] += 1
+
+        return res
+
+```
