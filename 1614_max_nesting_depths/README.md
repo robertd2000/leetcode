@@ -49,6 +49,8 @@ Output: 3
 
 # Code
 
+## Python (with stack)
+
 ```python
 
 class Solution:
@@ -73,6 +75,8 @@ class Solution:
 
 ```
 
+## Python (without stack)
+
 ```python
 
 class Solution:
@@ -90,5 +94,30 @@ class Solution:
 
 
         return maxNesting
+
+```
+
+## Java (without stack)
+
+```java
+
+class Solution {
+    public int maxDepth(String s) {
+        int maxNesting = 0;
+        int currentParentheses = 0;
+
+        for (int i : s.toCharArray()) {
+            if (i == '(') {
+                currentParentheses++;
+                maxNesting = Math.max(currentParentheses, maxNesting);
+            }
+            if (i == ')') {
+                currentParentheses--;
+            }
+        }
+
+        return maxNesting;
+    }
+}
 
 ```
