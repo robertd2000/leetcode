@@ -49,6 +49,8 @@ Output: 3
 
 # Code
 
+## Python (with stack)
+
 ```python
 
 class Solution:
@@ -73,6 +75,8 @@ class Solution:
 
 ```
 
+## Python (without stack)
+
 ```python
 
 class Solution:
@@ -92,6 +96,8 @@ class Solution:
         return maxNesting
 
 ```
+
+## Java (without stack)
 
 ```java
 
