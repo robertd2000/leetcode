@@ -44,12 +44,43 @@ merged: a p b q c   d
 word1 and word2 consist of lowercase English letters.
 ```
 
+# Approach
+
+- Initialize an empty string to store the merged result.
+- Traverse both input strings together, picking each character alternately from both strings and appending it to the merged result string.
+- Continue the traversal until the end of the longer string is reached.
+- Return the merged result string.
+
 # Complexity
 
 - **Time complexity:**
   `O(n)`
 
 # Code
+
+**Traverse**
+
+```python
+
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        res = []
+        n, m = len(word1), len(word2)
+        i = 0
+
+        while i < n or i < m:
+            if i < n:
+                res.append(word1[i])
+            if i < m:
+                res.append(word2[i])
+
+            i += 1
+
+        return "".join(res)
+
+```
+
+**Two pointers**
 
 ```python
 
