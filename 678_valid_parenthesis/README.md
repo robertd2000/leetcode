@@ -64,6 +64,4 @@ class Solution:
                 return False
         return cmin == 0
 
-
-
 ```
