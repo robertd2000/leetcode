@@ -68,3 +68,69 @@ class Solution:
         return res
 
 ```
+
+```go
+
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+	res := []bool{}
+	maxNum := max(candies)
+
+	for _, i := range candies {
+		if i+extraCandies >= maxNum {
+			res = append(res, true)
+		} else {
+			res = append(res, false)
+		}
+	}
+
+	return res
+}
+
+func max(list []int) int {
+	maxNum := 0
+
+	for _, i := range list {
+		if i > maxNum {
+			maxNum = i
+		}
+	}
+
+	return maxNum
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        vector<bool> result;
+
+        int max = findMax(candies);
+
+        for (int i = 0; i < candies.size(); i++) {
+            if (candies[i] + extraCandies >= max) {
+                result.push_back(true);
+            } else {
+                result.push_back(false);
+            }
+        }
+
+        return result;
+    }
+
+    int findMax(vector<int>& list) {
+        int max = 0;
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list[i] > max) {
+                max = list[i];
+            }
+        }
+
+        return max;
+    }
+};
+
+```
