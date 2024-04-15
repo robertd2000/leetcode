@@ -45,7 +45,7 @@ Therefore, sum = 495 + 491 + 40 = 1026.
 
 # Code
 
-**Recurence**
+**Recursive**
 
 ```python
 
