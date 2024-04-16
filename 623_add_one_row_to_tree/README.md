@@ -47,6 +47,8 @@ Output: [4,2,null,1,1,3,null,null,1]
 
 # Code
 
+**Recursive**
+
 ```python
 
 # Definition for a binary tree node.
