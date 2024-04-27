@@ -42,11 +42,31 @@ Explanation: The last word is "joyboy" with length 6.
 
 # Code
 
+**Trim string and split**
+
 ```python
 
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         arr = s.strip().split(' ')
         return len(arr[-1])
+
+```
+
+**Iterate over string**
+
+```python
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        l, tail = 0, len(s) - 1
+
+        while tail >= 0 and s[tail] == ' ':
+            tail-=1
+        while tail >= 0 and s[tail] != ' ':
+            l += 1
+            tail-=1
+
+        return l
 
 ```
