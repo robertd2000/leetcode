@@ -69,3 +69,48 @@ class Solution:
         return -1
 
 ```
+
+```python
+
+class Solution:
+    def findMaxK(self, nums: List[int]) -> int:
+        nums.sort()
+
+        l, r = 0, len(nums) - 1
+
+        while l < r:
+            if nums[l] + nums[r] == 0:
+                return nums[r]
+            if nums[l] + nums[r] < 0:
+                l += 1
+            else:
+                r -= 1
+
+        return -1
+
+```
+
+```java
+
+class Solution {
+    public int findMaxK(int[] nums) {
+        Arrays.sort(nums);
+
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left < right) {
+            if (nums[left] + nums[right] == 0) {
+                return nums[right];
+            } else if (nums[left] + nums[right] < 0) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return -1;
+    }
+}
+
+```
