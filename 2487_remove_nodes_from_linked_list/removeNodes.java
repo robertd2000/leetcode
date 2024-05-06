@@ -9,25 +9,32 @@
  * }
  */
 class Solution {
-    public ListNode removeNodes(ListNode head) {
-        Deque<ListNode> stack = new ArrayDeque<>();
+    public ListNode reverse(ListNode head) {
+        ListNode tail = null;
 
         while (head != null) {
-            while (!stack.isEmpty() && stack.peek().val < head.val) {
-                stack.pop();
-            }
-            stack.push(head);
-            head = head.next;
-        }
-
-        ListNode tail = null;
-        while (!stack.isEmpty()) {
-            ListNode current = stack.pop();
-            current.next = tail;
-            tail = current;
+            ListNode next = head.next;
+            head.next = tail;
+            tail = head;
+            head = next;
         }
 
         return tail;
+    }
+    public ListNode removeNodes(ListNode head) {
+        ListNode current = reverse(head);
+        ListNode tail = current;
+        int max = current.val;
 
+        while (current.next != null ){
+            if (current.next.val < max) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+                max = current.val;
+            }
+        }
+
+        return reverse(tail);
     }
 }
