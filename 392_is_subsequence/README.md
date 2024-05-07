@@ -71,8 +71,8 @@ class Solution {
 
         int j = 0;
 
-        for (int i = 0; i < m; i++) {
-            if (j < n && s.charAt(j) == t.charAt(i)) {
+        for (int i = 0; i < m && j < n; i++) {
+            if (s.charAt(j) == t.charAt(i)) {
                 j++;
             }
         }
