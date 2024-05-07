@@ -44,6 +44,8 @@ Explanation: The figure above corresponds to the given linked list which represe
 
 # Code
 
+**Stack** (with extra space)
+
 ```python
 
 # Definition for singly-linked list.
