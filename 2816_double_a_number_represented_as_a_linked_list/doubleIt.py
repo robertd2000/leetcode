@@ -12,8 +12,6 @@ class Solution:
         stack = []
         carry = 0
 
-        current = head
-
         while head:
             stack.append(head)
             head = head.next
