@@ -241,9 +241,7 @@ class Solution {
         tail = reverse(tail);
 
         if (carry > 0) {
-            ListNode temp = tail;
-            tail = new ListNode(carry);
-            tail.next = temp;
+            tail = new ListNode(carry, tail);
         }
 
         return tail;
