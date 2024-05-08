@@ -101,25 +101,32 @@ class Solution {
 
 ```cpp
 
-class TwoSum {
+class Solution {
 public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
+    int maxArea(vector<int>& height) {
+        int maximum = 0;
+
         int l = 0;
-        int r = numbers.size() - 1;
+        int r = height.size() - 1;
 
         while (l < r) {
-            if (numbers[l] + numbers[r] == target) {
-                return {l + 1, r + 1};
+            int lHeight = height[l];
+            int rHeight = height[r];
+
+            int square = min(lHeight, rHeight) * (r - l);
+
+            if (square > maximum) {
+                maximum = square;
             }
-            if (numbers[l] + numbers[r] > target) {
-                r--;
-            }
-             if (numbers[l] + numbers[r] < target) {
+
+            if (lHeight < rHeight) {
                 l++;
+            } else {
+                r--;
             }
         }
 
-       return {l + 1, r + 1};
+        return maximum;
     }
 };
 
