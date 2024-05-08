@@ -132,67 +132,41 @@ public:
 
 ```
 
-```c
-
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-int* twoSum(int* numbers, int numbersSize, int target, int* returnSize) {
-    int* result = (int*)malloc(2 * sizeof(int));
-
-    if (result == NULL) {
-        *returnSize = 0;
-        return NULL;
-    }
-
-    int l = 0;
-    int r = numbersSize - 1;
-
-    while (l < r) {
-        if (numbers[l] + numbers[r] == target) {
-            result[0] = l + 1;
-            result[1] = r + 1;
-
-            *returnSize = 2;
-            return result;
-        }
-
-        if (numbers[l] + numbers[r] > target) {
-            r--;
-        }
-
-        if (numbers[l] + numbers[r] < target) {
-            l++;
-        }
-    }
-    *returnSize = 0;
-    free(result);
-    return NULL;
-}
-
-```
-
 ```go
 
-package twosumsorted
+package maxarea
 
-func twoSum(numbers []int, target int) []int {
-	l, r := 0, len(numbers)-1
+func maxArea(height []int) int {
+	max := 0
+
+	l, r := 0, len(height)-1
 
 	for l < r {
-		if numbers[l]+numbers[r] == target {
-			return []int{l + 1, r + 1}
+		lHeight, rHeight := height[l], height[r]
+		square := min(lHeight, rHeight) * (r - l)
+
+		if square > max {
+			max = square
 		}
-		if numbers[l]+numbers[r] > target {
-			r = r - 1
-		}
-		if numbers[l]+numbers[r] < target {
-			l = l + 1
+
+		if lHeight < rHeight {
+			l++
+		} else {
+			r--
 		}
 	}
 
-	return []int{l, r}
+	return max
 }
+
+func min(first, second int) int {
+	if first < second {
+		return first
+	}
+
+	return second
+}
+
 
 ```
 
