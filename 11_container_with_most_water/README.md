@@ -196,55 +196,73 @@ function maxArea(height: number[]): number {
 }
 ```
 
-```cs
-
-public class TwoSum {
-    public int[] TwoSum(int[] numbers, int target) {
-        int l = 0;
-        int r = numbers.Length - 1;
-
-        while (l < r) {
-            if (numbers[l] + numbers[r] == target) {
-                return new int[] { l + 1, r + 1 };
-            }
-
-            if (numbers[l] + numbers[r] > target) {
-                r--;
-            }
-
-            if (numbers[l] + numbers[r] < target) {
-                l++;
-            }
-        }
-
-        return new int[] {};
-    }
-}
-
-```
-
 ```rs
 
-impl TwoSum {
-    pub fn two_sum(numbers: Vec<i32>, target: i32) -> Vec<i32> {
-        let mut l = 0;
-        let mut r = numbers.len() - 1;
+use std::cmp::Ordering;
 
-        while l < r {
-            if numbers[l] + numbers[r] == target {
-                return vec![(l + 1) as i32, (r + 1) as i32];
-            }
+impl Solution {
+    pub fn max_area(height: Vec<i32>) -> i32 {
+        Self::max_area_acc(&height, 0, 0)
+    }
 
-            if numbers[l] + numbers[r] > target {
-                 r = r - 1;
-            }
-
-            if numbers[l] + numbers[r] < target {
-                 l = l + 1;
-            }
+    pub fn max_area_acc(heights: &[i32], acc: i32, max_height: i32) -> i32 {
+        let len = heights.len();
+        if heights.len() < 2 {
+            return acc;
         }
 
-         vec![0, 0]
+        let mut i = 0;
+        let mut j = len - 1;
+
+        let first = loop {
+            if i >= j {
+                break max_height;
+            }
+
+            let first = heights[i];
+            if first > max_height {
+                break first;
+            }
+
+            i += 1;
+        };
+
+        let last = loop {
+            if i >= j {
+                break max_height;
+            }
+
+            let last = heights[j];
+            if last > max_height {
+                break last;
+            }
+
+            j -= 1;
+        };
+
+        let height = first.min(last);
+        let width = (j - i) as i32;
+        if width == 0 {
+            return acc;
+        }
+
+        match first.cmp(&last) {
+            Ordering::Less => {
+                let height = first;
+                let area = width * height;
+                Self::max_area_acc(&heights[(i + 1)..(j + 1)], acc.max(area), height) // leave right
+            },
+            Ordering::Equal => {
+                let height = first;
+                let area = width * height;
+                Self::max_area_acc(&heights[(i + 1)..j], acc.max(area), height) // dont leave anything
+            },
+            Ordering::Greater => {
+                let height = last;
+                let area = width * height;
+                Self::max_area_acc(&heights[i..j], acc.max(area), height) // leave left
+            },
+        }
     }
 }
 
