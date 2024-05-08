@@ -41,6 +41,42 @@ Explanation: The placements are [1st, 5th, 3rd, 2nd, 4th].
 
 # Code
 
+**HashMap**
+
+```python
+
+Ranks = {
+    '1': "Gold Medal",
+    '2': "Silver Medal",
+    '3': "Bronze Medal",
+}
+
+class Solution:
+    def getRank(self, val: int) -> str:
+
+        if val > 3:
+            return str(val)
+        else:
+            return Ranks[str(val)]
+
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        hash = {}
+
+        sortedScore = sorted(score, reverse=True)
+
+        for i, value in enumerate(sortedScore):
+            rank = self.getRank(i + 1)
+            hash[value] = rank
+
+        res = []
+
+        for i in score:
+            res.append(hash[i])
+
+        return res
+
+```
+
 **Sort**
 
 ```python
