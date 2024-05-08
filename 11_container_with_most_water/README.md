@@ -70,20 +70,30 @@ class Solution:
 ```java
 
 class Solution {
-    public int[] twoSum(int[] numbers, int target) {
-        int left = 0;
-        int right = numbers.length - 1;
+    public int maxArea(int[] height) {
+        int max = 0;
 
-        while (left < right) {
-            if (numbers[left] + numbers[right] == target) {
-                return new int[] { left + 1, right + 1 };
-            } else if (numbers[left] + numbers[right] < target) {
-                left++;
-            } else {
-                right--;
+        int l = 0;
+        int r = height.length - 1;
+
+        while (l < r) {
+            int lH = height[l];
+            int rH = height[r];
+
+            int square = Math.min(lH, rH) * (r - l);
+
+            if (square > max) {
+                max = square;
             }
+
+            if (lH < rH)
+                l++;
+            else
+                r--;
         }
-        return new int[] { left, right };
+
+        return max;
+
     }
 }
 
