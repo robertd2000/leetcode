@@ -37,7 +37,7 @@ Explanation: The placements are [1st, 5th, 3rd, 2nd, 4th].
 # Complexity
 
 - **Time complexity:**
-  `O(n^2)`
+  `O(n)`
 
 # Code
 

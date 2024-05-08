@@ -43,3 +43,10 @@ The tests are generated such that there is exactly one solution.
 ```
 
 _Only one valid answer exists._
+
+# Complexity
+
+- **Time complexity:**
+  `O(n)`
+- **Space complexity:**
+  `O(1)`
