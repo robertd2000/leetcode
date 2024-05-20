@@ -61,7 +61,7 @@ Explanation: The sum of all XOR totals for every subset is 480.
 
 # Code
 
-## Recursive
+## Iter
 
 ```python
 
@@ -72,5 +72,24 @@ class Solution:
             b |= i
 
         return b * int(pow(2, len(nums) - 1))
+
+```
+
+## Recursive
+
+```python
+
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        return self.back(nums, 0, 0)
+
+    def back(self, nums: List[int], index: int, current: int) -> int:
+        if index == len(nums):
+            return current
+
+        withElement = self.back(nums, index + 1, current ^ nums[index])
+        withoutElement = self.back(nums, index + 1, current)
+
+        return withElement + withoutElement
 
 ```
