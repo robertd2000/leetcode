@@ -7,7 +7,7 @@ class Solution {
         for (int i = 1; i <= n; i++)
             for (int j = 0; j < 2; j++)
                 for (int k = 0; k < 3; k++) {
-                    int val = f[i - 1][j][2]; // ...P
+                    int val = f[i - 1][j][2]; 
                     if (j > 0)
                         val = (val + f[i - 1][j - 1][2]) % MOD; 
                     if (k > 0)
