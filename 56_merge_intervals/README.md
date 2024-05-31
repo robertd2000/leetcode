@@ -32,15 +32,14 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 function merge(intervals: number[][]): number[][] {
   intervals.sort((a, b) => a[0] - b[0]);
 
-  const results = [intervals[0]];
+  const results: number[][] = [intervals[0]];
 
-  for (let i = 1; i < intervals.length; i++) {
-    if (results.at(-1)[1] >= intervals[i][0]) {
-      const prev = results.pop();
-
-      results.push([prev[0], Math.max(prev[1], intervals[i][1])]);
+  for (let interval of intervals) {
+    const recent = results[results.length - 1];
+    if (recent[1] >= interval[0]) {
+      recent[1] = Math.max(recent[1], interval[1]);
     } else {
-      results.push(intervals[i]);
+      results.push(interval);
     }
   }
 
