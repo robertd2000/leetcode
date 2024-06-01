@@ -50,7 +50,6 @@ class Solution:
 
         return total
 
-
 ```
 
 ```ts
