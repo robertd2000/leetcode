@@ -1,23 +1,23 @@
 function leastBricks(wall: number[][]): number {
-  const intersections = {};
+  const map = {};
 
   for (let i = 0; i < wall.length; i++) {
     let brick = 0;
     for (let j = 0; j < wall[i].length - 1; j++) {
       brick += wall[i][j];
-      if (brick in intersections) {
-        intersections[brick]++;
+      if (brick in map) {
+        map[brick]++;
       } else {
-        intersections[brick] = 1;
+        map[brick] = 1;
       }
     }
   }
 
   let max = 0;
 
-  for (let i in intersections) {
-    if (intersections[i] > max) {
-      max = intersections[i];
+  for (let i in map) {
+    if (map[i] > max) {
+      max = map[i];
     }
   }
 
