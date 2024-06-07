@@ -94,7 +94,7 @@ class Solution {
         int right = arr.length - 1;
 
         while (left < right) {
-            int mid = (int)Math.floor((left + right) / 2);
+            int mid = (left + right) / 2;
 
             if (arr[mid] < arr[mid + 1]) {
                 left = mid + 1;
