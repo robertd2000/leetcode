@@ -38,6 +38,79 @@ Output: [0,1,2]
 
 # Code
 
+**Counting sort**:
+
+```py
+
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        count = [0] * 4
+
+        for i in nums:
+            count[i] += 1
+
+        pos = 0
+
+        for i in range(len(count)):
+            for j in range(count[i]):
+                nums[pos] = i
+                pos += 1
+
+        return nums
+
+```
+
+```java
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int[] count = new int[4];
+
+        for (int num : nums) {
+            count[num]++;
+        }
+
+        int pos = 0;
+
+        for (int i = 0; i < count.length; i++) {
+            while (count[i] > 0) {
+                nums[pos] = i;
+                count[i]--;
+                pos++;
+            }
+        }
+    }
+}
+
+```
+
+```ts
+/**
+ Do not return anything, modify nums in-place instead.
+ */
+function sortColors(nums: number[]): void {
+  const count = new Array<number>(4).fill(0);
+
+  for (let num of nums) {
+    count[num]++;
+  }
+
+  let pos = 0;
+
+  for (let i = 0; i < count.length; i++) {
+    for (let j = 0; j < count[i]; j++) {
+      nums[pos] = i;
+      pos++;
+    }
+  }
+}
+```
+
+**Pointers**
+
 ```python
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
