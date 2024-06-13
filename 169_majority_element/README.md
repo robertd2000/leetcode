@@ -28,6 +28,49 @@ _Follow-up:_ Could you solve the problem in linear time and in `O(1)` space?
 
 ## Code
 
+**Linear time**
+
+```py
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        count = 0
+        candidate = 0
+
+        for num in nums:
+            if count == 0:
+                candidate = num
+
+            if num == candidate:
+                count += 1
+            else:
+                count -= 1
+
+        return candidate
+
+```
+
+```ts
+function majorityElement(nums: number[]): number {
+  let count = 0;
+  let candidate = 0;
+
+  for (let num of nums) {
+    if (count === 0) {
+      candidate = num;
+    }
+
+    if (num === candidate) {
+      count++;
+    } else {
+      count--;
+    }
+  }
+
+  return candidate;
+}
+```
+
 **Sort**
 
 ```python
