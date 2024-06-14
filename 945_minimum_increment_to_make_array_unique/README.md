@@ -65,6 +65,7 @@ function minIncrementForUnique(nums: number[]): number {
 **Map**
 
 ```py
+
 class Solution:
     def minIncrementForUnique(self, nums: List[int]) -> int:
         root = {}
