@@ -66,3 +66,48 @@ function isEmpty(obj) {
   return true;
 }
 ```
+
+```ts
+function longestPalindrome(s: string): number {
+  const seen = new Set();
+
+  let res = 0;
+
+  for (let c of s) {
+    if (seen.has(c)) {
+      res += 2;
+      seen.delete(c);
+    } else {
+      seen.add(c);
+    }
+  }
+
+  if (seen.size) {
+    res += 1;
+  }
+
+  return res;
+}
+```
+
+```python
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        seen = set()
+
+        res = 0
+
+        for i in s:
+            if i in seen:
+                seen.remove(i)
+                res += 2
+            else:
+                seen.add(i)
+
+        if seen:
+            res += 1
+
+        return res
+
+```
