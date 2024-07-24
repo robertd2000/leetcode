@@ -60,3 +60,79 @@ class Solution:
         # return [i for i, _ in list(counter)]
 
 ```
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function (nums, k) {
+  const hashMap = new Map();
+  const freq = new Array(nums.length + 1).fill(null);
+
+  for (let num of nums) {
+    if (hashMap.has(num)) {
+      const value = hashMap.get(num) + 1;
+      hashMap.set(num, value);
+    } else {
+      hashMap.set(num, 1);
+    }
+  }
+
+  hashMap.forEach((value, key) => {
+    if (Array.isArray(freq[value])) {
+      freq[value].push(key);
+    } else {
+      freq[value] = [key];
+    }
+  });
+
+  const result = [];
+
+  for (let i = freq.length - 1; i >= 0; i--) {
+    if (Array.isArray(freq[i]))
+      for (let j of freq[i]) {
+        result.push(j);
+        if (result.length === k) return result;
+      }
+  }
+
+  return result;
+};
+```
+
+```java
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+
+        List<Integer>[] bucket = new List[nums.length + 1];
+        Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
+
+        for (int n : nums) {
+            frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+        }
+
+        for (int key : frequencyMap.keySet()) {
+            int frequency = frequencyMap.get(key);
+            if (bucket[frequency] == null) {
+                bucket[frequency] = new ArrayList<>();
+            }
+            bucket[frequency].add(key);
+        }
+
+        List<Integer> res = new ArrayList<>();
+
+        for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
+            if (bucket[pos] != null) {
+                res.addAll(bucket[pos]);
+            }
+        }
+        return res.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+}
+
+```
