@@ -171,3 +171,39 @@ class Solution {
 }
 
 ```
+
+```go
+
+func containsDuplicate(nums []int) bool {
+    count := make(map[int]int)
+
+    for _, i := range nums {
+        if _, ok := count[i]; ok {
+            return true
+        }
+
+        count[i] = 1
+    }
+
+    return false
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int, bool> counter;
+
+        for (int num : nums) {
+            if (counter.find(num) != counter.end()) return true;
+            counter[num] = true;
+        }
+
+        return false;
+    }
+};
+
+```
