@@ -140,3 +140,146 @@ class Solution:
 
         return res
 ```
+
+```cpp
+
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> res;
+
+        for (int i = 0; i < intervals.size(); i++) {
+            vector<int> interval = intervals[i];
+
+            if (newInterval[1] < interval[0]) {
+                res.push_back(newInterval);
+                res.insert(res.end(), intervals.begin() + i, intervals.end());
+                return res;
+            } else if (newInterval[0] > interval[1]) {
+                res.push_back(interval);
+            } else {
+                int start = min(newInterval[0], interval[0]);
+                int end = max(newInterval[1], interval[1]);
+                newInterval = {start, end};
+            }
+        }
+
+        res.push_back(newInterval);
+
+        return res;
+    }
+};
+
+```
+
+```java
+
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList<>();
+
+        for (int[] interval : intervals) {
+            if (interval[1] < newInterval[0]) {
+                result.add(interval);
+            } else if (interval[0] > newInterval[1]) {
+                result.add(newInterval);
+                newInterval = interval;
+            } else {
+                int start = Math.min(interval[0], newInterval[0]);
+                int end = Math.max(interval[1], newInterval[1]);
+                newInterval = new int[] {start, end};
+            }
+        }
+
+        result.add(newInterval);
+
+        return result.toArray(new int[result.size()][]);
+    }
+}
+
+```
+
+```go
+
+func insert(intervals [][]int, newInterval []int) [][]int {
+    var res [][]int
+
+    for idx, interval := range intervals {
+        if interval[0] > newInterval[1] {
+            res = append(res, newInterval)
+            res = append(res, intervals[idx:]...)
+            return res
+        } else if interval[1] < newInterval[0] {
+            res = append(res, interval)
+        } else {
+            start := min(interval[0], newInterval[0])
+            end := max(interval[1], newInterval[1])
+            newInterval = []int {start, end}
+        }
+    }
+
+    res = append(res, newInterval)
+
+    return res
+}
+
+func max(a int, b int) int {
+    if a > b {
+        return a
+    }
+
+    return b
+}
+
+func min(a int, b int) int {
+    if a < b {
+        return a
+    }
+
+    return b
+}
+
+```
+
+```c
+
+int **insert(int **intervals, int intervalsSize, int *intervalsColSize, int *newInterval, int newIntervalSize, int *returnSize, int **returnColumnSizes) {
+    int **result = (int **)malloc((intervalsSize + 1) * sizeof(int *));
+    *returnSize = 0;
+    *returnColumnSizes = (int *)malloc((intervalsSize + 1) * sizeof(int));
+
+    int i = 0;
+    while (i < intervalsSize && intervals[i][1] < newInterval[0]) {
+        result[*returnSize] = (int *)malloc(2 * sizeof(int));
+        result[*returnSize][0] = intervals[i][0];
+        result[*returnSize][1] = intervals[i][1];
+        (*returnColumnSizes)[*returnSize] = 2;
+        (*returnSize)++;
+        i++;
+    }
+
+    while (i < intervalsSize && intervals[i][0] <= newInterval[1]) {
+        newInterval[0] = (newInterval[0] < intervals[i][0]) ? newInterval[0] : intervals[i][0];
+        newInterval[1] = (newInterval[1] > intervals[i][1]) ? newInterval[1] : intervals[i][1];
+        i++;
+    }
+
+    result[*returnSize] = (int *)malloc(2 * sizeof(int));
+    result[*returnSize][0] = newInterval[0];
+    result[*returnSize][1] = newInterval[1];
+    (*returnColumnSizes)[*returnSize] = 2;
+    (*returnSize)++;
+
+    while (i < intervalsSize) {
+        result[*returnSize] = (int *)malloc(2 * sizeof(int));
+        result[*returnSize][0] = intervals[i][0];
+        result[*returnSize][1] = intervals[i][1];
+        (*returnColumnSizes)[*returnSize] = 2;
+        (*returnSize)++;
+        i++;
+    }
+
+    return result;
+}
+
+```
