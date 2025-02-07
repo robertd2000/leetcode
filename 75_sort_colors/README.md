@@ -128,3 +128,51 @@ class Solution:
                 blue -= 1
 
 ```
+
+```cpp
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int count[3] = {0, 0, 0};
+        int n = nums.size();
+
+        for (int num : nums) {
+            count[num]++;
+        }
+
+        int k = 0;
+
+        for (int i = 0; i < sizeof(count)/sizeof(*count); i++) {
+            for (int j = 0; j < count[i]; j++) {
+                nums[k] = i;
+                k++;
+            }
+        }
+
+        return;
+    }
+};
+
+```
+
+```go
+
+func sortColors(nums []int)  {
+    count := [3]int{}
+
+    for _, num := range nums {
+        count[num]++
+    }
+
+    k := 0
+
+    for i := range 3 {
+        for j := 0; j < count[i]; j++ {
+            nums[k] = i
+            k++
+        }
+    }
+}
+
+```
