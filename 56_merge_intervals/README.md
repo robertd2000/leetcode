@@ -46,3 +46,152 @@ function merge(intervals: number[][]): number[][] {
   return results;
 }
 ```
+
+```py
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals = sorted(intervals, key=lambda x: x[0])
+        res = [intervals[0]]
+
+        for interval in intervals:
+            prev = res[-1]
+            if prev[1] >= interval[0]:
+                prev[1] = max(interval[1], prev[1])
+            else:
+                res.append(interval)
+
+        return res
+
+```
+
+```java
+
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        int n = intervals.length;
+        if (n <= 1)
+			return intervals;
+
+		Arrays.sort(intervals, (i1, i2) -> Integer.compare(i1[0], i2[0]));
+        Stack<int[]> res = new Stack<>();
+        res.add(intervals[0]);
+
+        for (int[] interval : intervals) {
+            int[] prev = res.peek();
+
+            if (prev[1] >= interval[0]) {
+                prev[1] = Math.max(prev[1], interval[1]);
+            } else {
+                res.add(interval);
+            }
+        }
+
+		return res.toArray(new int[res.size()][]);
+    }
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+  vector<vector<int>> merge(vector<vector<int>>& intervals) {
+      vector<vector<int>> res;
+      sort(intervals.begin(), intervals.end());
+
+      for (auto interval : intervals) {
+          if (res.empty() || res.back()[1] < interval[0]) {
+              res.push_back(interval);
+          } else {
+              res.back()[1] = max(res.back()[1], interval[1]);
+          }
+      }
+
+      return res;
+  }
+
+  static bool comp(vector<int> a, vector<int> b) { return a[0] > b[0]; }
+};
+
+```
+
+```go
+
+func merge(intervals [][]int) [][]int {
+	var res [][]int
+
+	sort.Slice(intervals, func(i, j int) bool {
+		if len(intervals[i]) == 0 && len(intervals[j]) == 0 {
+			return false
+		}
+		if len(intervals[i]) == 0 || len(intervals[j]) == 0 {
+			return len(intervals[i]) == 0
+		}
+
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	res = append(res, intervals[0])
+
+	for _, interval := range intervals {
+		n := len(res) - 1
+		if res[n][1] >= interval[0] {
+			res[n][1] = max(res[n][1], interval[1])
+		} else {
+			res = append(res, interval)
+		}
+	}
+
+	return res
+}
+
+func max(a int, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+```
+
+```c
+
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume
+ * caller calls free().
+ */
+int comp(const void* a, const void* b) {
+    return (*(int**)a)[0] - (*(int**)b)[0];
+}
+
+int** merge(int** intervals, int intervalsSize, int* intervalsColSize,
+            int* returnSize, int** returnColumnSizes) {
+    qsort(intervals, intervalsSize, sizeof(int*), comp);
+
+    int** stack = (int**)malloc(sizeof(int*) * intervalsSize);
+    stack[0] = intervals[0];
+    int top = 1;
+    for (int i = 1; i < intervalsSize; i++) {
+        if (intervals[i][0] <= stack[top - 1][1]) {
+            stack[top - 1][1] = intervals[i][1] > stack[top - 1][1]
+                                    ? intervals[i][1]
+                                    : stack[top - 1][1];
+        } else {
+            stack[top++] = intervals[i];
+        }
+    }
+
+    *returnSize = top;
+    *returnColumnSizes = (int*)malloc(sizeof(int) * (*returnSize));
+    for (int i = 0; i < *returnSize; i++) {
+        (*returnColumnSizes)[i] = 2;
+    }
+    return stack;
+}
+
+```
