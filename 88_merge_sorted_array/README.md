@@ -104,3 +104,110 @@ class Solution {
 }
 
 ```
+
+```ts
+/**
+ Do not return anything, modify nums1 in-place instead.
+ */
+function merge(nums1: number[], m: number, nums2: number[], n: number): void {
+  let i = m - 1;
+  let j = n - 1;
+  let k = m + n - 1;
+
+  while (j >= 0) {
+    if (i >= 0 && nums1[i] > nums2[j]) {
+      nums1[k] = nums1[i];
+      i--;
+    } else {
+      nums1[k] = nums2[j];
+      j--;
+    }
+    k--;
+  }
+}
+```
+
+```go
+
+func merge(nums1 []int, m int, nums2 []int, n int)  {
+    i, j, k := m - 1, n - 1, m + n - 1
+
+    for j >= 0 {
+        if i >= 0 && nums1[i] > nums2[j] {
+            nums1[k] = nums1[i]
+            i--
+        } else {
+            nums1[k] = nums2[j]
+            j--
+        }
+
+        k--
+    }
+}
+
+```
+
+```java
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int l = m - 1;
+        int r = n - 1;
+        int i = m + n - 1;
+
+        while (r >= 0) {
+            if (l >= 0 && nums1[l] > nums2[r]) {
+                nums1[i--] = nums1[l--];
+            } else {
+                nums1[i--] = nums2[r--];
+            }
+        }
+    }
+}
+
+```
+
+```cpp
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (j >= 0) {
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+
+            k--;
+        }
+    }
+};
+```
+
+```c
+
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n) {
+    int i = m - 1;
+    int j = n - 1;
+    int k = m + n - 1;
+
+    while (j >= 0) {
+        if (i >= 0 && nums1[i] > nums2[j]) {
+            nums1[k] = nums1[i];
+            i--;
+        } else {
+            nums1[k] = nums2[j];
+            j--;
+        }
+
+        k--;
+    }
+}
+
+```
