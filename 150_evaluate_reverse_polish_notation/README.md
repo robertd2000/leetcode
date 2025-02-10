@@ -167,3 +167,91 @@ class Solution:
         return int(a / b)
 
 ```
+
+```go
+
+func evalRPN(tokens []string) int {
+	stack := []int{}
+	operators := map[string]func(int, int) int{
+		"+": func(a, b int) int { return a + b },
+		"-": func(a, b int) int { return a - b },
+		"*": func(a, b int) int { return a * b },
+		"/": func(a, b int) int { return a / b },
+	}
+	for _, token := range tokens {
+		if calculate, exist := operators[token]; exist {
+			a, b := stack[len(stack)-2], stack[len(stack)-1]
+			stack = append(stack[:len(stack)-2], calculate(a, b))
+		} else {
+			num, _ := strconv.Atoi(token)
+			stack = append(stack, num)
+		}
+	}
+	return stack[0]
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int> stack;
+        set<string> operations = {"+", "-", "*", "/"};
+
+        for (auto token : tokens) {
+            if (operations.find(token) != operations.end()) {
+                int b = stack.top();
+                stack.pop();
+                int a = stack.top();
+                stack.pop();
+                int c = calculate(a, b, token);
+                stack.push(c);
+            } else {
+                stack.push(stoi(token));
+            }
+        }
+
+        return stack.top();
+    }
+
+private:
+    int calculate(int a, int b, string op) {
+        if (op == "+") return a + b;
+        if (op == "-") return a - b;
+        if (op == "*") return a * b;
+        if (op == "/") return a / b;
+
+        return 0;
+    }
+};
+
+```
+
+```java
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        Set<String> o = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+        for (String i : tokens) {
+            if (!o.contains(i))
+                stack.push(Integer.valueOf(i));
+            else {
+                int a = stack.pop(), b = stack.pop();
+                if (i.equals("+"))
+                    stack.push(a + b);
+                else if (i.equals("-"))
+                    stack.push(b - a);
+                else if (i.equals("*"))
+                    stack.push(a * b);
+                else
+                    stack.push(b / a);
+            }
+        }
+        return stack.peek();
+    }
+}
+
+```
