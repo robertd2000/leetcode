@@ -211,3 +211,89 @@ public:
 };
 
 ```
+
+```c
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool hasCycle(struct ListNode *head) {
+    struct ListNode *slow = head;
+    struct ListNode *fast = head;
+
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (fast == slow) return true;
+    }
+
+    return false;
+}
+
+```
+
+```kt
+
+/**
+ * Example:
+ * var li = ListNode(5)
+ * var v = li.`val`
+ * Definition for singly-linked list.
+ * class ListNode(var `val`: Int) {
+ *     var next: ListNode? = null
+ * }
+ */
+
+class Solution {
+    fun hasCycle(head: ListNode?): Boolean {
+        var fast = head
+        var slow = head
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next
+            slow = slow?.next
+
+            if (fast == slow) return true
+        }
+
+        return false
+    }
+}
+
+```
+
+```cs
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public bool HasCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) return true;
+        }
+
+        return false;
+    }
+}
+
+```
