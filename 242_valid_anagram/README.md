@@ -53,6 +53,12 @@ class Solution:
 
 ```
 
+```ts
+function isAnagram(s: string, t: string): boolean {
+  return s.split("").sort().join("") === t.split("").sort().join("");
+}
+```
+
 ```java
 
 class Solution {
