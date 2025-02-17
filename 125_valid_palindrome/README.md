@@ -60,6 +60,41 @@ class Solution:
 
 ```
 
+```ts
+function isPalindrome(s: string): boolean {
+  if (s.trim() === "") {
+    return true;
+  }
+
+  let str = "";
+
+  const lowerString = s.toLowerCase();
+
+  for (let i = 0; i <= lowerString.length - 1; i++) {
+    if (
+      (lowerString[i] >= "a" && lowerString[i] <= "z") ||
+      (lowerString[i] >= "0" && lowerString[i] <= "9")
+    ) {
+      str += lowerString[i];
+    }
+  }
+
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str.charCodeAt(left) === str.charCodeAt(right)) {
+      left++;
+      right--;
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+}
+```
+
 ```java
 
 class Solution {
@@ -90,6 +125,83 @@ class Solution {
 
         return true;
     }
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    bool isAlphanumeric(char ch) {
+        return std::isalnum(ch);
+    }
+    bool isPalindrome(string s) {
+        int n = s.length();
+
+        int l = 0;
+        int r = n - 1;
+
+        while (l < r) {
+            if (!isAlphanumeric(s[l])) {
+                l++;
+                continue;
+            }
+            if (!isAlphanumeric(s[r])) {
+                r--;
+                continue;
+            }
+
+            if (isAlphanumeric(s[l]) && isAlphanumeric(s[r])) {
+                if (std::tolower(s[l]) != std::tolower(s[r])) {
+                    return false;
+                }
+
+                l++;
+                r--;
+            }
+        }
+
+        return true;
+    }
+};
+
+```
+
+```cpp
+
+func isPalindrome(s string) bool {
+    n := len(s)
+    l, r := 0, n - 1
+
+    for l < r {
+        lR, rR := rune(s[l]), rune(s[r])
+        if !isAlphanumeric(lR) {
+            l++
+        }
+        if !isAlphanumeric(rR) {
+            r--
+        }
+
+        if isAlphanumeric(lR) && isAlphanumeric(rR) {
+            if strings.ToLower(string(lR)) != strings.ToLower(string(rR)) {
+                return false
+            }
+
+            l++
+            r--
+        }
+    }
+
+    return true
+}
+
+func isAlphanumeric(ch rune) bool {
+    if unicode.IsLetter(ch) || unicode.IsDigit(ch) {
+        return true
+    }
+
+    return false
 }
 
 ```
