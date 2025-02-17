@@ -53,6 +53,12 @@ class Solution:
 
 ```
 
+```ts
+function isAnagram(s: string, t: string): boolean {
+  return s.split("").sort().join("") === t.split("").sort().join("");
+}
+```
+
 ```java
 
 class Solution {
@@ -139,6 +145,33 @@ class Solution:
 
         return True
 
+```
+
+```ts
+function isAnagram(s: string, t: string): boolean {
+  const n = s.length;
+  const m = t.length;
+
+  if (n !== m) return false;
+
+  const hash = new Map<string, number>();
+
+  for (const i of s) {
+    const value = hash.get(i) || 0;
+    hash.set(i, value + 1);
+  }
+
+  for (const i of t) {
+    const value = hash.get(i) || 0;
+    hash.set(i, value - 1);
+
+    if (hash.has(i) && hash.get(i) < 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
 ```
 
 ```java
@@ -251,5 +284,48 @@ class Solution:
                 return False
 
         return True
+
+```
+
+```cpp
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int n = s.length();
+        int m = t.length();
+
+        if (n != m) return false;
+
+        unordered_map<char, int> hash;
+
+        for (char ch: s) {
+            hash[ch]++;
+        }
+
+        for (char ch: t) {
+            hash[ch]--;
+
+            if (hash[ch] < 0) return false;
+        }
+
+        return true;
+    }
+};
+
+```
+
+```rs
+
+impl Solution {
+    pub fn is_anagram(s: String, t: String) -> bool {
+        let mut map = std::collections::HashMap::new();
+
+        s.chars().for_each(|c| *map.entry(c).or_insert(0) += 1);
+        t.chars().for_each(|c| *map.entry(c).or_insert(0) -= 1);
+
+        map.into_values().all(|v| v == 0)
+    }
+}
 
 ```
