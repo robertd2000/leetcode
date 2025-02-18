@@ -191,3 +191,153 @@ class Solution:
 
 
 ```
+
+```go
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func isBalanced(root *TreeNode) bool {
+	if root != nil {
+		left := getHeight(root.Left)
+		right := getHeight(root.Right)
+		skew := abs(left, right)
+
+		if !isBalanced(root.Left) {
+			return false
+		}
+		if !isBalanced(root.Right) {
+			return false
+		}
+		if skew > 1 {
+			return false
+		}
+
+		return true
+	}
+
+	return true
+}
+
+func getHeight(root *TreeNode) int {
+	if root != nil {
+		left := getHeight(root.Left)
+		right := getHeight(root.Right)
+
+		return max(left, right) + 1
+	}
+
+	return 0
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+func abs(a, b int) int {
+	c := a - b
+	if c < 0 {
+		return -c
+	}
+
+	return c
+}
+
+
+```
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) return true;
+
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+
+        int skew = Math.abs(left - right);
+
+        if (!isBalanced(root.left)) return false;
+        if (!isBalanced(root.right)) return false;
+        if (skew > 1) return false;
+
+        return true;
+    }
+
+    private int getHeight(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+
+        return Math.max(left, right) + 1;
+    }
+}
+
+```
+
+```cpp
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        if (root) {
+            int left = getHeight(root->left);
+            int right = getHeight(root->right);
+            int skew = abs(left - right);
+
+            if (!isBalanced(root->left)) return false;
+            if (!isBalanced(root->right)) return false;
+            if (skew > 1) return false;
+
+            return true;
+        }
+        return true;
+    }
+
+    int getHeight(TreeNode* root) {
+        if (root == 0) return 0;
+
+        int leftHeight = getHeight(root->left);
+        int rightHeight = getHeight(root->right);
+
+        return max(leftHeight, rightHeight) + 1;
+    }
+};
+
+```
