@@ -111,3 +111,82 @@ class Solution:
         return res
 
 ```
+
+```java
+
+class Solution {
+    public int longestPalindrome(String s) {
+        int res = 0;
+        int n = s.length();
+
+        Set<Character> visited = new HashSet<>();
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+
+            if (visited.contains(c)) {
+                res += 2;
+                visited.remove(c);
+            } else {
+                visited.add(c);
+            }
+        }
+
+        if (!visited.isEmpty()) res++;
+
+        return res;
+    }
+}
+
+```
+
+```go
+
+func longestPalindrome(s string) int {
+	res := 0
+
+	visited := make(map[rune]bool)
+
+	for _, c := range s {
+		if _, ok := visited[c]; ok {
+			res += 2
+			delete(visited, c)
+		} else {
+			visited[c] = true
+		}
+	}
+
+	if len(visited) > 0 {
+		res++
+	}
+
+	return res
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int res = 0;
+
+        set<char> visited;
+
+        for (char c : s) {
+            if (visited.find(c) != visited.end()) {
+                res += 2;
+                visited.erase(c);
+            } else {
+                visited.insert(c);
+            }
+        }
+
+        if (!visited.empty()) res++;
+
+        return res;
+    }
+};
+
+```
