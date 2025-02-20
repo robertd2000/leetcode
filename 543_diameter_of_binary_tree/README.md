@@ -94,3 +94,122 @@ class Solution:
 
             return self.maxDiameter
 ```
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int maxDiameter = 0;
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        dfs(root);
+        return maxDiameter;
+    }
+
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        int diameter = left + right;
+
+        maxDiameter = Math.max(maxDiameter, diameter);
+
+        return Math.max(left, right) + 1;
+    }
+}
+
+```
+
+```go
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func diameterOfBinaryTree(root *TreeNode) int {
+	diameter := 0
+
+	var dfs func(root *TreeNode) int
+
+	dfs = func(root *TreeNode) int {
+		if root != nil {
+			left := dfs(root.Left)
+			right := dfs(root.Right)
+			diameter = max(diameter, left+right)
+			return max(left, right) + 1
+		}
+
+		return 0
+	}
+
+	dfs(root)
+
+	return diameter
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+```
+
+```cpp
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
+ * };
+ */
+class Solution {
+    int maxDiameter = 0;
+
+    int dfs(TreeNode* root) {
+        if (root) {
+            int left = dfs(root->left);
+            int right = dfs(root->right);
+
+            maxDiameter = max(maxDiameter, left + right);
+            return max(left, right) + 1;
+        }
+        return 0;
+    }
+
+public:
+    int diameterOfBinaryTree(TreeNode* root) {
+        dfs(root);
+
+        return maxDiameter;
+    }
+};
+
+```
