@@ -89,3 +89,119 @@ class Solution:
 
         return dfs(root)
 ```
+
+```go
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func maxDepth(root *TreeNode) int {
+	depth := 0
+
+	var dfs func(root *TreeNode) int
+
+	dfs = func(root *TreeNode) int {
+		if root != nil {
+			left := dfs(root.Left)
+			right := dfs(root.Right)
+			d := max(left, right) + 1
+			depth = max(depth, d)
+			return d
+		}
+
+		return 0
+	}
+
+	dfs(root)
+
+	return depth
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
+}
+
+```
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private int depth;
+
+    private int dfs(TreeNode root) {
+        if (root == null) return 0;
+
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        int d = Math.max(left, right) + 1;
+
+        depth = Math.max(depth, d);
+        return d;
+    }
+    public int maxDepth(TreeNode root) {
+        dfs(root);
+
+        return depth;
+    }
+}
+
+```
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+    int depth = 0;
+
+    int dfs(TreeNode* root) {
+        if (root) {
+            int left = dfs(root->left);
+            int right = dfs(root->right);
+            int d = max(left, right) + 1;
+            depth = max(depth, d);
+            return d;
+        }
+
+        return 0;
+    }
+public:
+    int maxDepth(TreeNode* root) {
+        dfs(root);
+
+        return depth;
+    }
+};
+```
