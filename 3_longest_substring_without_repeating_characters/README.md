@@ -131,3 +131,115 @@ class Solution:
 
         return maxLength
 ```
+
+```ts
+function lengthOfLongestSubstring(s: string): number {
+  const n = s.length;
+
+  if (n === 0) return 0;
+
+  let max = 0;
+
+  const map = new Map<string, number>();
+
+  let j = 0;
+
+  for (let i = 0; i < n; i++) {
+    const char = s[i];
+    if (map.has(char)) {
+      j = Math.max(j, (map.get(char) || 0) + 1);
+    }
+
+    map.set(char, i);
+    max = Math.max(max, i - j + 1);
+  }
+
+  return max;
+}
+```
+
+```go
+
+func lengthOfLongestSubstring(s string) int {
+    n := len(s)
+
+    if n == 0 {
+        return 0
+    }
+
+    longest := 0
+    hash := make(map[rune]int)
+    j := 0
+
+    for i, c := range s {
+        if val, ok := hash[c]; ok {
+            j = max(j, val + 1)
+        }
+
+        hash[c] = i
+        longest = max(longest, i - j + 1)
+    }
+
+    return longest
+}
+
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+
+    return b
+}
+
+```
+
+```java
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0)
+            return 0;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+
+        for (int i = 0, j = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                j = Math.max(j, map.get(s.charAt(i)) + 1);
+            }
+            map.put(s.charAt(i), i);
+            max = Math.max(max, i - j + 1);
+        }
+        return max;
+    }
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+
+        if (n == 0)
+            return 0;
+
+        int longest = 0;
+        unordered_map<char, int> map;
+
+        int j = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (map.contains(s[i])) {
+                j = max(j, map[s[i]] + 1);
+            }
+            map[s[i]] = i;
+            longest = max(longest, i - j + 1);
+        }
+
+        return longest;
+    }
+};
+
+```
