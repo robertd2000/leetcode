@@ -26,6 +26,44 @@ Output: "bb"
 
 # Code
 
+```ts
+function longestPalindrome(s: string): string {
+  const n = s.length;
+
+  let maxLen = 0;
+  let res = "";
+
+  for (let i = 0; i < n; i++) {
+    let l = i;
+    let r = i;
+
+    while (l >= 0 && r < n && s[l] === s[r]) {
+      let diff = r - l + 1;
+      if (diff > maxLen) {
+        maxLen = diff;
+        res = s.slice(l, r + 1);
+      }
+      l -= 1;
+      r += 1;
+    }
+    l = i;
+    r = i + 1;
+
+    while (l >= 0 && r < n && s[l] === s[r]) {
+      let diff = r - l + 1;
+      if (diff > maxLen) {
+        maxLen = diff;
+        res = s.slice(l, r + 1);
+      }
+      l -= 1;
+      r += 1;
+    }
+  }
+
+  return res;
+}
+```
+
 ```python
 
 class Solution:
@@ -53,5 +91,170 @@ class Solution:
                 r += 1
 
         return res
+
+```
+
+```go
+
+func longestPalindrome(s string) string {
+    res := ""
+    maxLen := 0
+
+    for i := 0; i < len(s); i++ {
+        l, r := i, i
+
+        for l >= 0 && r < len(s) && s[l] == s[r] {
+            if r - l + 1 > maxLen {
+                res = s[l: r + 1]
+                maxLen = r - l + 1
+            }
+
+            l--
+            r++
+        }
+
+        l, r = i, i + 1
+
+        for l >= 0 && r < len(s) && s[l] == s[r] {
+            if r - l + 1 > maxLen {
+                res = s[l: r + 1]
+                maxLen = r - l + 1
+            }
+
+            l--
+            r++
+        }
+    }
+
+    return res
+}
+
+```
+
+```java
+
+class Solution {
+    public String longestPalindrome(String s) {
+        String result = "";
+
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int left = i;
+            int right = i;
+
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                if (right - left + 1 > maxLength) {
+                    result = s.substring(left, right + 1);
+                    maxLength = right - left + 1;
+                }
+                left--;
+                right++;
+            }
+
+            left = i;
+            right = i + 1;
+
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                if (right - left + 1 > maxLength) {
+                    result = s.substring(left, right + 1);
+                    maxLength = right - left + 1;
+                }
+                left--;
+                right++;
+            }
+        }
+
+        return result;
+    }
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string res = "";
+        int maxLen = 0;
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+            int l = i;
+            int r = i;
+
+            while (l >= 0 && r < n && s[l] == s[r]) {
+                int diff = r - l + 1;
+                if (diff > maxLen) {
+                    maxLen = diff;
+                    res = s.substr(l, diff);
+                }
+                l--;
+                r++;
+            }
+
+            l = i;
+            r = i + 1;
+
+            while (l >= 0 && r < n && s[l] == s[r]) {
+                int diff = r - l + 1;
+                if (diff > maxLen) {
+                    maxLen = diff;
+                    res = s.substr(l, diff);
+                }
+                l--;
+                r++;
+            }
+        }
+
+        return res;
+    }
+};
+
+```
+
+```c
+
+char* longestPalindrome(char* s) {
+    int maxLen = 0;
+    int n = strlen(s);
+
+    char* res;
+
+    for (int i = 0; i < n; i++) {
+        int l = i;
+        int r = i;
+
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            int diff = r - l + 1;
+            if (diff > maxLen) {
+                maxLen = diff;
+                res = malloc(maxLen + 1);
+                memcpy(res, &s[l], maxLen);
+                res[maxLen] = '\0';
+            }
+            l--;
+            r++;
+        }
+
+        l = i;
+        r = i + 1;
+
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            int diff = r - l + 1;
+            if (diff > maxLen) {
+                maxLen = diff;
+                res = malloc(maxLen + 1);
+                memcpy(res, &s[l], maxLen);
+                res[maxLen] = '\0';
+            }
+            l--;
+            r++;
+        }
+    }
+
+    return res;
+}
 
 ```
