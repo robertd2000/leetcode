@@ -134,3 +134,118 @@ class Solution:
 
         return res
 ```
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        bfs(root, 0, res);
+        return res;
+    }
+
+    private void bfs(TreeNode root, int level, List<List<Integer>> res) {
+        if (root == null) return;
+        if (res.size() <= level) res.add(new ArrayList<>());
+
+        res.get(level).add(root.val);
+        bfs(root.left, level + 1, res);
+        bfs(root.right, level + 1, res);
+    }
+}
+
+```
+
+```java
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        List<List<Integer>> res = new LinkedList<List<Integer>>();
+
+        if(root == null) return res;
+
+        queue.offer(root);
+
+        while(!queue.isEmpty()){
+            int levelNum = queue.size();
+            List<Integer> subList = new LinkedList<Integer>();
+            for(int i=0; i<levelNum; i++) {
+                if(queue.peek().left != null) queue.offer(queue.peek().left);
+                if(queue.peek().right != null) queue.offer(queue.peek().right);
+                subList.add(queue.poll().val);
+            }
+            res.add(subList);
+        }
+
+        return res;
+    }
+}
+
+```
+
+```cpp
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> res;
+        bfs(root, 0, res);
+        return res;
+    }
+
+private:
+    void bfs(TreeNode* root, int level, vector<vector<int>>& res) {
+        if (root == 0) return;
+
+        if (res.size() <= level) {
+            res.push_back({});
+        }
+        res[level].push_back(root->val);
+        bfs(root->left, level + 1, res);
+        bfs(root->right, level + 1, res);
+    }
+};
+
+```
