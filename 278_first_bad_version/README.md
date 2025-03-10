@@ -111,3 +111,186 @@ class Solution:
         return left
 
 ```
+
+```cpp
+
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        int l = 1;
+        int r = n;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            if (isBadVersion(m)) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        return l;
+    }
+};
+
+```
+
+```java
+
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+
+            if (isBadVersion(middle)) {
+                right = middle - 1;
+            } else {
+                left = middle + 1;
+            }
+        }
+
+        return left;
+    }
+}
+
+```
+
+```go
+
+/**
+ * Forward declaration of isBadVersion API.
+ * @param   version   your guess about first bad version
+ * @return 	 	      true if current version is bad
+ *			          false if current version is good
+ * func isBadVersion(version int) bool;
+ */
+
+func firstBadVersion(n int) int {
+    l, r := 1, n
+
+    for l <= r {
+        m := l + (r - l) / 2
+
+        if isBadVersion(m) {
+            r = m - 1
+        } else {
+            l = m + 1
+        }
+    }
+
+    return l
+}
+
+```
+
+```c
+
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+int firstBadVersion(int n) {
+    int l = 1;
+    int r = n;
+
+    while (l <= r) {
+        int m = l + (r - l) / 2;
+
+        if (isBadVersion(m)) {
+            r = m - 1;
+        } else {
+            l = m + 1;
+        }
+    }
+
+    return l;
+}
+
+```
+
+```cs
+
+/* The isBadVersion API is defined in the parent class VersionControl.
+      bool IsBadVersion(int version); */
+
+public class Solution : VersionControl {
+    public int FirstBadVersion(int n) {
+        int l = 0;
+        int r = n;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            if (IsBadVersion(m)) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        return l;
+    }
+}
+
+```
+
+```rs
+
+// The API isBadVersion is defined for you.
+// isBadVersion(version:i32)-> bool;
+// to call it use self.isBadVersion(version)
+
+impl Solution {
+    pub fn first_bad_version(&self, n: i32) -> i32 {
+		let mut l = 1;
+        let mut r = n;
+
+        while l <= r {
+            let mut m = l + (r - l) / 2;
+
+            if self.isBadVersion(m) {
+                r = m - 1
+            } else {
+                l = m + 1
+            }
+        }
+
+        return l
+    }
+}
+
+```
+
+```kt
+
+/* The isBadVersion API is defined in the parent class VersionControl.
+      fun isBadVersion(version: Int) : Boolean {} */
+
+class Solution: VersionControl() {
+    override fun firstBadVersion(n: Int) : Int {
+            var l: Long = 1
+    var r: Long = n.toLong() + 1
+
+    while (l < r) {
+        val m = l + (r - l) / 2
+
+        if (isBadVersion(m.toInt()))
+            r = m
+        else
+            l = m + 1
+    }
+
+    return l.toInt()
+	}
+}
+
+```
