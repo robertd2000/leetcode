@@ -66,3 +66,59 @@ function dfs(nums: number[], path: number[], res: number[][]) {
   return res;
 }
 ```
+
+```go
+
+func permute(nums []int) [][]int {
+    answer := make([][]int, 0)
+    aux(&answer, 0, nums)
+	return answer
+}
+
+func aux(answer *[][]int, idx int, nums []int) {
+    if idx == len(nums) {
+        c := make([]int, len(nums))
+        copy(c, nums)
+        *answer = append(*answer, c)
+        return
+    }
+    for i := idx; i < len(nums); i++ {
+        nums[idx], nums[i] = nums[i], nums[idx]
+        aux(answer, idx + 1, nums)
+        nums[i], nums[idx] = nums[idx], nums[i]
+    }
+    return
+}
+
+```
+
+```java
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        dfs(nums, new ArrayList<>(), res);
+        return res;
+    }
+
+    private void dfs(int[] nums, List<Integer> path, List<List<Integer>> res) {
+        if (nums.length == 0) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            int[] newNums = new int[nums.length - 1];
+            System.arraycopy(nums, 0, newNums, 0, i);
+            System.arraycopy(nums, i + 1, newNums, i, nums.length - i - 1);
+
+            path.add(nums[i]);
+
+            dfs(newNums, path, res);
+
+            path.remove(path.size() - 1);
+        }
+    }
+}
+
+```
