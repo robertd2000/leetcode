@@ -241,3 +241,63 @@ impl Solution {
 
 
 ```
+
+```rs
+
+use std::collections::HashMap;
+use std::cmp;
+
+impl Solution {
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        let mut res = 0;
+        let n = s.len();
+
+        if n == 0 {
+            return res;
+        }
+
+        let mut h_map: HashMap<char, i32> = HashMap::new();
+
+        let mut j = 0;
+
+        for c in 0..n {
+            let i = c as i32;
+            let key = s.chars().nth(c).unwrap();
+
+            if h_map.contains_key(&key) {
+                j = cmp::max(j, h_map.get(&key).map(|&x| x + 1).unwrap()) as i32;
+            }
+            res = cmp::max(res, (i - j + 1) as i32);
+            h_map.insert(key, i);
+        }
+
+        return res;
+    }
+}
+
+```
+
+```rs
+
+impl Solution {
+    pub fn length_of_longest_substring(s: String) -> i32 {
+        let mut max_len: usize = 0;
+
+        let mut pos: [usize;128] = [0;128];
+
+        let mut start: usize = 0;
+
+        for (end, ch) in s.chars().enumerate()
+        {
+            start = start.max(pos[ch as usize]);
+
+            max_len = max_len.max(end-start+1);
+
+            pos[ch as usize] = end + 1;
+        }
+
+        return max_len as i32;
+    }
+}
+
+```
