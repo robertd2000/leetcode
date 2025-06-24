@@ -23,3 +23,25 @@ Explanation: [9,4] is also accepted.
 - What if the given array is already sorted? How would you optimize your algorithm?
 - What if nums1's size is small compared to nums2's size? Which algorithm is better?
 - What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+
+```py
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        if len(nums1) > len(nums2): return self.intersect(nums2, nums1)
+
+        res = []
+
+        h = defaultdict(int)
+
+        for i in nums1:
+            h[i] += 1
+
+        for i in nums2:
+            if i in h and h[i] > 0:
+                res.append(i)
+                h[i] -= 1
+
+        return res
+
+```
