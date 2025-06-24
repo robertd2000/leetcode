@@ -24,6 +24,10 @@ Explanation: [9,4] is also accepted.
 - What if nums1's size is small compared to nums2's size? Which algorithm is better?
 - What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 
+#### Solutions
+
+**hash table approach**
+
 ```py
 
 class Solution:
@@ -41,6 +45,35 @@ class Solution:
             if i in h and h[i] > 0:
                 res.append(i)
                 h[i] -= 1
+
+        return res
+
+```
+
+**sorted**
+
+```py
+
+from typing import List
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        a = sorted(nums1)
+        b = sorted(nums2)
+        res = []
+        i = j = 0
+
+        while i < len(a) and j < len(b):
+            if a[i] == b[j]:
+                res.append(a[i])
+                i += 1
+                j += 1
+
+            elif a[i] < b[j]:
+                i += 1
+            else:
+                j += 1
 
         return res
 
