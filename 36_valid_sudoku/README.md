@@ -55,3 +55,31 @@ Explanation: Same as Example 1, except with the 5 in the top left corner being m
 - `board.length == 9`
 - `board[i].length == 9`
 - `board[i][j]` is a digit `1-9` or `'.'`.
+
+```py
+
+from collections import defaultdict
+from typing import List
+
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        boardMap = defaultdict(list)
+
+        for x in range(9):
+            for y in range(9):
+                char = board[x][y]
+                if char != ".":
+                    if char in boardMap:
+                        for pos in boardMap[char]:
+                            if (
+                                (pos[0] == x)
+                                or (pos[1] == y)
+                                or (pos[0] // 3 == x // 3 and pos[1] // 3 == y // 3)
+                            ):
+                                return False
+                    boardMap[char].append((x, y))
+
+        return True
+
+```
