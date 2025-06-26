@@ -31,3 +31,28 @@ Output: [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
 - `n == matrix.length == matrix[i].length`
 - `1 <= n <= 20`
 - `-1000 <= matrix[i][j] <= 1000`
+
+```py
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        self.reverse(matrix)
+        self.transpose(matrix)
+
+    def reverse(self, matrix: List[List[int]]) -> None:
+        l, r = 0, len(matrix) - 1
+
+        while l < r:
+            matrix[l], matrix[r] = matrix[r], matrix[l]
+            l += 1
+            r -= 1
+
+    def transpose(self, matrix: List[List[int]]) -> None:
+        for i in range(len(matrix)):
+            for j in range(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+```
