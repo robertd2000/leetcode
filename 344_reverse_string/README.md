@@ -40,3 +40,74 @@ function reverseString(s: string[]): void {
   }
 }
 ```
+
+```py
+
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -=1
+
+```
+
+```go
+
+func reverseString(s []byte)  {
+    l, r := 0, len(s) - 1
+
+    for l < r {
+        s[l], s[r] = s[r], s[l]
+        l++
+        r--
+    }
+}
+
+```
+
+```java
+
+class Solution {
+    public void reverseString(char[] s) {
+        int l = 0;
+        int r = s.length - 1;
+
+        while (l < r) {
+            swap(s, l, r);
+            l++;
+            r--;
+        }
+    }
+
+    private void swap(char[] s, int l, int r) {
+        char temp = s[l];
+        s[l] = s[r];
+        s[r] = temp;
+    }
+}
+
+```
+
+```cpp
+
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int l = 0;
+        int r = s.size() - 1;
+
+        while (l < r) {
+            swap(s[l], s[r]);
+            l++;
+            r--;
+        }
+    }
+};
+
+```
