@@ -56,3 +56,32 @@ class Solution:
         return -1
 
 ```
+
+```go
+
+func strStr(haystack string, needle string) int {
+    n, m := len(haystack), len(needle)
+
+    for i := 0; i < n - m + 1; i++ {
+        if haystack[i: i + m] == needle {
+            return i
+        }
+    }
+
+    return -1
+}
+
+```
+
+```ts
+function strStr(haystack: string, needle: string): number {
+  const n = haystack.length;
+  const m = needle.length;
+
+  for (let i = 0; i < n - m + 1; i++) {
+    if (haystack.slice(i, i + m) === needle) return i;
+  }
+
+  return -1;
+}
+```
