@@ -36,3 +36,20 @@ Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
 
 - `1 <= nums.length <= 10^5`
 - `-10^4 <= nums[i] <= 10^4`
+
+```py
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        max_sum = nums[0]
+        curr_sum = 0
+
+        for num in nums:
+            if curr_sum < 0:
+                curr_sum = 0
+            curr_sum += num
+            max_sum = max(max_sum, curr_sum)
+
+        return max_sum
+
+```
