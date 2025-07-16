@@ -33,3 +33,57 @@ rotate 2 steps to the right: [3,99,-1,-100]
 
 - Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
 - Could you do it in-place with `O(1)` extra space?
+
+Можно использовать доп массив, в котором хранить оригинальные позиции в массиве. Пройтись от 0 до `k` и записать в начало массива значения `k` с конца - `temp[i + n - k]`. Потом пройтись от `k` до `n` и записать значения с начала массива - `nums[i] = temp[i - k]`
+
+Можно обойтись без доп памяти - использовать повороты массива. Нужно найти правую границу - `r = k % n `, т.к. `k` может быть больше чем длинна массива `n`. Потом сделать 3 поворота - сначала повернуть весь массив, потом его левую часть до `r - 1` - тогда получится что конец из `k` элементов находится в начале массива. Затем повернуть конец массива.
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var rotate = function (nums, k) {
+  const n = nums.length;
+  const r = k % n;
+
+  reverse(nums, 0, n - 1);
+  reverse(nums, 0, r - 1);
+  reverse(nums, r, n - 1);
+};
+
+function reverse(nums, l, r) {
+  while (l < r) {
+    let temp = nums[l];
+    nums[l] = nums[r];
+    nums[r] = temp;
+    l++;
+    r--;
+  }
+}
+```
+
+```ts
+/**
+ Do not return anything, modify nums in-place instead.
+ */
+function rotate(nums: number[], k: number): void {
+  const n = nums.length;
+  k = k % n;
+
+  if (n === 1 || k === 0) {
+    return;
+  }
+
+  const temp = [...nums];
+
+  for (let i = 0; i < k + 1; i++) {
+    nums[i] = temp[i + n - k];
+  }
+
+  for (let i = k; i < n; i++) {
+    nums[i] = temp[i - k];
+  }
+}
+```
