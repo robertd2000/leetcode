@@ -55,7 +55,32 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 - `-100 <= nums[i] <= 100`
 - `nums` is sorted in **non-decreasing** order.
 
+Используем 2 указателя - `i` на текущий элемент и `k` на позицию уникального. Начинаем цикл с 1, т.к. первый элемент уникален.Если текущий элемент `nums[i]` не равен последнему уникальному `nums[k]`, то значит он уникален и мы инкрементируем указатель `k` на уникальнвй элемент, затем присваиваем в эту позицию текущий элемент:
+
+```
+nums[k] = nums[i]
+```
+
 # Code
+
+```js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function (nums) {
+  let k = 0;
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] != nums[k]) {
+      k++;
+      nums[k] = nums[i];
+    }
+  }
+
+  return k + 1;
+};
+```
 
 ```python
 
