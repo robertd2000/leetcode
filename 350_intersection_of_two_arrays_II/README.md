@@ -64,6 +64,29 @@ class Solution:
 
 ```
 
+```go
+
+func intersect(nums1 []int, nums2 []int) []int {
+	hash := make(map[int]int)
+
+	var res []int
+
+	for _, num := range nums1 {
+		hash[num] += 1
+	}
+
+	for _, num := range nums2 {
+		if hash[num] > 0 {
+			res = append(res, num)
+		}
+		hash[num] -= 1
+	}
+
+	return res
+}
+
+```
+
 **sorted**
 
 **Complexity:**
@@ -97,5 +120,33 @@ class Solution:
                 j += 1
 
         return res
+
+```
+
+```go
+
+func intersect(nums1 []int, nums2 []int) []int {
+	sort.Ints(nums1)
+	sort.Ints(nums2)
+
+	var res []int
+
+	i, j := 0, 0
+	n, m := len(nums1), len(nums2)
+
+	for i < n && j < m {
+		if nums1[i] == nums2[j] {
+			res = append(res, nums1[i])
+			i++
+			j++
+		} else if nums1[i] < nums2[j] {
+			i++
+		} else {
+			j++
+		}
+	}
+
+	return res
+}
 
 ```
