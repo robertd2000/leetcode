@@ -29,3 +29,53 @@ Output: false
 
 - The number of nodes in both trees is in the range [0, 100].
 - -10^4 <= Node.val <= 10^4
+
+## Code
+
+```py
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        stack = [(p, q)]
+
+        while stack:
+            n, m = stack.pop()
+
+            if not n and not m:
+                continue
+            elif None in [n, m]:
+                return False
+            else:
+                if n.val != m.val:
+                    return False
+                stack.append((n.right, m.right))
+                stack.append((n.left, m.left))
+
+        return True
+```
+
+```py
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if p == None or q == None:
+            return p == q
+
+        if p.val != q.val:
+            return False
+
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+```
