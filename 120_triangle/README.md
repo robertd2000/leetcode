@@ -39,6 +39,22 @@ The idea is to go bottom-up from the bottom of the triangle. We do this by looki
 
 ## Solution
 
+```go
+
+func minimumTotal(triangle [][]int) int {
+    n := len(triangle)
+
+    for i := n - 2; i >= 0; i-- {
+        for j := 0; j <= i; j++ {
+            triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1])
+        }
+    }
+
+    return triangle[0][0]
+}
+
+```
+
 ```ts
 function minimumTotal(triangle: number[][]): number {
   for (let r = triangle.length - 2; r >= 0; r--) {
