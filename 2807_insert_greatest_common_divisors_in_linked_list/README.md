@@ -1,0 +1,146 @@
+[2807. Insert Greatest Common Divisors in Linked List](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/)
+
+Given the head of a linked list `head`, in which each node contains an integer value.
+
+Between every pair of adjacent nodes, insert a new node with a value equal to the **greatest common divisor** of them.
+
+Return _the linked list after insertion_.
+
+The **greatest common divisor** of two numbers is the largest positive integer that evenly divides both numbers.
+
+## Example 1:
+
+![alt text](image.png)
+
+Input: head = [18,6,10,3]
+Output: [18,6,6,2,10,1,3]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes (nodes in blue are the inserted nodes).
+
+- We insert the greatest common divisor of 18 and 6 = 6 between the 1st and the 2nd nodes.
+- We insert the greatest common divisor of 6 and 10 = 2 between the 2nd and the 3rd nodes.
+- We insert the greatest common divisor of 10 and 3 = 1 between the 3rd and the 4th nodes.
+  There are no more adjacent nodes, so we return the linked list.
+
+## Example 2:
+
+![alt text](image-1.png)
+
+Input: head = [7]
+Output: [7]
+Explanation: The 1st diagram denotes the initial linked list and the 2nd diagram denotes the linked list after inserting the new nodes.
+There are no pairs of adjacent nodes, so we return the initial linked list.
+
+## Constraints:
+
+- The number of nodes in the list is in the range `[1, 5000]`.
+- `1 <= Node.val <= 1000`
+
+## Solution
+
+```go
+
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func insertGreatestCommonDivisors(head *ListNode) *ListNode {
+	if head == nil {
+		return head
+	}
+	prev := head
+	curr := head.Next
+
+	for curr != nil {
+		val := gcd(prev.Val, curr.Val)
+		node := &ListNode{Val: val, Next: curr}
+		prev.Next = node
+		prev = curr
+		curr = curr.Next
+	}
+
+	return head
+}
+
+func gcd(a int, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+
+	return a
+}
+
+```
+
+```py
+
+# Definition for singly-linked list.
+from typing import Optional
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = head
+        curr = head.next
+
+        while curr is not None:
+            gcd = self.gcd(prev.val, curr.val)
+            node = ListNode(gcd, curr)
+            prev.next = node
+            prev = curr
+            curr = curr.next
+
+        return head
+
+    def gcd(self, a: int, b: int):
+        while b != 0:
+            a, b = b, a % b
+
+        return a
+
+```
+
+```ts
+//Definition for singly-linked list.
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+function insertGreatestCommonDivisors(head: ListNode | null): ListNode | null {
+  if (head == null) return head;
+
+  let prev = head;
+  let curr = head.next;
+
+  while (curr != null) {
+    let val = gcd(prev.val, curr.val);
+    let node = new ListNode(val, curr);
+    prev.next = node;
+    prev = curr;
+    curr = curr.next;
+  }
+
+  return head;
+}
+
+function gcd(a: number, b: number): number {
+  while (b != 0) {
+    let temp = a;
+    a = b;
+    b = temp % b;
+  }
+  return a;
+}
+```
