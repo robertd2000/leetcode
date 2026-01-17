@@ -76,7 +76,7 @@ func getMinIdx(nums []int) int {
 function getFinalState(
   nums: number[],
   k: number,
-  multiplier: number
+  multiplier: number,
 ): number[] {
   for (let i = 0; i < k; i++) {
     let idx = getMinIdx(nums);
