@@ -227,15 +227,22 @@ public:
 
 ```rs
 
-class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        count = set()
+use std::collections::HashSet;
 
-        for num in nums:
-            if num in count:
-                return True
-            count.add(num)
+impl Solution {
+    pub fn contains_duplicate(nums: Vec<i32>) -> bool {
+        let mut set = HashSet::new();
 
-        return False
+        for num in nums {
+            if set.contains(&num) {
+                return true;
+            }
+
+            set.insert(num);
+        }
+
+        return false;
+    }
+}
 
 ```
